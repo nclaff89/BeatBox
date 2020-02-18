@@ -4,9 +4,11 @@ import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 
 class SoundViewModel(private val beatBox: BeatBox): BaseObservable() {
+
+
     fun onButtonClicked() {
         sound?.let{
-            beatBox.play(it)
+           beatBox.play(it, speed!!)
         }
 
     }
@@ -20,4 +22,16 @@ class SoundViewModel(private val beatBox: BeatBox): BaseObservable() {
     @get: Bindable
     val title: String?
         get() = sound?.name
+
+    /**
+     * Chapter 20 challenge 1
+     */
+    var speed: Float? = 1.0f
+        set(speed){
+            field = speed
+            notifyChange()
+        }
+//    @get: Bindable
+//    val playbackSpeed: Float?
+//        get() = sound?.speed
 }

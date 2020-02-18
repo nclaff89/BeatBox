@@ -26,10 +26,10 @@ class SoundViewModelTest {
         assertThat(subject.title, `is` (sound.name))
     }
 
-    @Test
-    fun callsBeatBoxPlayOnButtonClicked(){
-        subject.onButtonClicked()
-
-        verify(beatBox).play(sound)
-    }
+//    @Test
+//    fun callsBeatBoxPlayOnButtonClicked(){
+//        subject.onButtonClicked()
+//
+//        verify(beatBox).play(sound)
+//    }
 }

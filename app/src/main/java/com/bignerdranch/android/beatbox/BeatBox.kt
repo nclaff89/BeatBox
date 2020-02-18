@@ -22,9 +22,13 @@ class BeatBox(private val assets: AssetManager){
         sounds = loadSounds()
     }
 
-    fun play(sound: Sound){
+    /**
+     * Chapter 20 challenge 1 change signature to
+     * take in a float as a parameter
+     */
+    fun play(sound: Sound, speed: Float){
         sound.soundId?.let{
-            soundPool.play(it, 1.0f, 1.0f, 1, 0, 1.0f)
+            soundPool.play(it, 1.0f, 1.0f, 1, 0, speed) //insert speed last
         }
     }
 
