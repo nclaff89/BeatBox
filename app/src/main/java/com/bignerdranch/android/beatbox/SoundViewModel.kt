@@ -11,6 +11,18 @@ class SoundViewModel(private val beatBox: BeatBox): BaseObservable() {
 
     }
 
+    fun resume(){
+        sound?.let{
+            beatBox.resume(it)
+        }
+    }
+
+    fun pause(){
+        sound?.let{
+            beatBox.pause(it)
+        }
+    }
+
     var sound: Sound? = null
         set(sound){
             field = sound

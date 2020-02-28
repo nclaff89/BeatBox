@@ -32,6 +32,20 @@ class BeatBox(private val assets: AssetManager){
         soundPool.release()
     }
 
+    fun pause(sound: Sound){
+        sound.soundId?.let{
+            soundPool.pause(it)
+        }
+
+    }
+
+    fun resume(sound: Sound){
+        sound.soundId?.let{
+            soundPool.resume(it)
+        }
+    }
+
+
     private fun loadSounds(): List<Sound>{
 
         val soundNames: Array<String>
