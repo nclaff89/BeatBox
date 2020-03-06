@@ -2,13 +2,9 @@ package com.bignerdranch.android.beatbox
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.beatbox.databinding.ActivityMainBinding
@@ -16,24 +12,23 @@ import com.bignerdranch.android.beatbox.databinding.ListItemSoundBinding
 
 class MainActivity : AppCompatActivity() {
 
-    //private lateinit var beatBox: BeatBox
     private val bbViewModel by lazy { BeatBoxViewModel(assets)}
-    //private lateinit var beatBox: BeatBox
+    private lateinit var beatBox: BeatBox
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //beatBox = bbViewModel.bb
-        bbViewModel.bb.resume()
+        /**
+         * Chapter 20 challenge 2
+         */
+        beatBox = bbViewModel.bb
 
-
-       // beatBox = BeatBox(assets)
 
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
 
                 binding.recyclerView.apply {
                     layoutManager = GridLayoutManager(context, 3)
-                    adapter = SoundAdapter(bbViewModel.bb.sounds)
+                    adapter = SoundAdapter(beatBox.sounds)
                 }
 
 
@@ -44,15 +39,18 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy(){
         super.onDestroy()
         Log.d("onDestroy", "activity destroyed")
-        bbViewModel.bb.pause()
-        bbViewModel.bb.release()
+        /**
+         * Remove the line of code where we release the
+         * Sounpool in onDestroy() for chapter20_challenge2
+         */
+
     }
 
     private inner class SoundHolder(private val binding: ListItemSoundBinding):
             RecyclerView.ViewHolder(binding.root){
 
         init {
-            binding.viewModel = SoundViewModel(bbViewModel.bb)
+            binding.viewModel = SoundViewModel(beatBox)
         }
 
         fun bind(sound: Sound){
